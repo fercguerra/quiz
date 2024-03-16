@@ -6,10 +6,14 @@ main() {
 }
 
 class PerguntaApp extends StatelessWidget {
-  const PerguntaApp({super.key});
+  
+
+  var perguntaSelecionada = 0;
 
 void responder() {
-  print('Pergunta Respondida');
+
+  perguntaSelecionada++;
+  print(perguntaSelecionada);
 }
 
 
@@ -28,7 +32,7 @@ final perguntas = [
         ),
          body: Column(
           children: [
-            Text(perguntas[0]),
+            Text(perguntas[ perguntaSelecionada]),
             ElevatedButton(
               child: Text('Resposta 1'),
               onPressed: responder,
