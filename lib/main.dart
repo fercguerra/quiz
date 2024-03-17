@@ -50,11 +50,20 @@ class _PerguntaAppState extends State<PerguntaApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Perguntas'),
-        ),
+          
+          title: const Text('Perguntas',
+          
+          ),
+          backgroundColor: Colors.blue,
+          centerTitle: true, // Definindo a cor do AppBar aqui
+      ),
+        
+        backgroundColor: Color.fromARGB(255, 231, 141, 191),
         body: temPerguntaSelecionada? Column(
           children: [
+          
             Questao(_perguntas[_perguntaSelecionada]['texto'].toString()),
+            
             ...respostas.map((t) => Resposta(t, _responder)).toList(),
             //pergou as resposas, usou um map para converter a lista de string e lista de widgtes
           ],
@@ -62,6 +71,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
           child: Text('Parabéns!',
           style: TextStyle(
             fontSize: 28
+            
           ),),
         ),
       ),
