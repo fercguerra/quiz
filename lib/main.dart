@@ -6,16 +6,7 @@ void main() => runApp(PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
-
-  void _responder() {
-    setState(() {
-      _perguntaSelecionada++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Map<String, Object>> perguntas = [
+   final List<Map<String, Object>> _perguntas = const [
       //Map é uma coleção de elementos onde cada elemento é um par chave-valor. A chave e o valor podem ser de qualquer tipo, e cada chave em um Map deve ser única.
       {
         'texto': 'Qual sua cor favorita?',
@@ -30,11 +21,30 @@ class _PerguntaAppState extends State<PerguntaApp> {
         'respostas': ['Maria', 'João', 'Leo', 'Pedro'],
       }
     ];
-    List <Widget> respostas = [];
-    for (String textoResp in perguntas[_perguntaSelecionada].cast()['respostas']) {
-      respostas.add(Resposta(textoResp, _responder));
-    
+
+  void _responder() {
+    if(temPerguntaSelecionada) {
+      setState(() {
+      _perguntaSelecionada++;
+    });
     }
+    
+    
+  }
+
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+   
+    
+    List<String> respostas = temPerguntaSelecionada ? _perguntas[_perguntaSelecionada].cast()['respostas']:[];
+    List <Widget> widgets = respostas.map((t) => Resposta(t, _responder)).toList();
+
+    
+
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -42,12 +52,13 @@ class _PerguntaAppState extends State<PerguntaApp> {
         appBar: AppBar(
           title: const Text('Perguntas'),
         ),
-        body: Column(
+        body: temPerguntaSelecionada? Column(
           children: [
-            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-            ...respostas,
+            Questao(_perguntas[_perguntaSelecionada]['texto'].toString()),
+            ...respostas.map((t) => Resposta(t, _responder)).toList(),
+            //pergou as resposas, usou um map para converter a lista de string e lista de widgtes
           ],
-        ),
+        ): null,
       ),
     );
   }
