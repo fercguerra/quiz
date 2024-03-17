@@ -21,6 +21,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
     ];
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Perguntas'),
