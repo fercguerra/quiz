@@ -4,28 +4,20 @@ class Resposta extends StatelessWidget {
   final String texto;
   final void Function() quandoSelecionado;
 
-  Resposta(this.texto, this.quandoSelecionado);
+  const Resposta(this.texto, this.quandoSelecionado, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-              Colors.purple), // Cor de fundo quando o botão está no estado padrão
-          foregroundColor: MaterialStateProperty.all<Color>(
-              Colors.white), // Cor do texto do botão
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0), // Ajuste o valor conforme necessário
-              // Se desejar, você também pode adicionar bordas diferentes para o botão
-              // side: BorderSide(color: Colors.purple, width: 2),
-            ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            
           ),
-        ),
           onPressed: quandoSelecionado,
           child: Text(texto),
         ),
